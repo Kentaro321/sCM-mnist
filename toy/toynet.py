@@ -23,6 +23,7 @@
 
 
 import math
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -75,7 +76,6 @@ class Net(nn.Module):
             return preds
 
     def norm_logvar(self):
-        eps = 1e-8
         for param in self.logvar_net.parameters():
             param.data.copy_(
                 param.data / torch.linalg.vector_norm(param.data, keepdim=True)

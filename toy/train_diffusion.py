@@ -1,16 +1,14 @@
-import math
 import os
+
 import click
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import torch.nn as nn
 from torch.utils.data import DataLoader
-import torchvision
-import torchvision.transforms as transforms
 from tqdm import tqdm
-from toynet import Net
-import matplotlib.pyplot as plt
+
 from toy_utils import *
+from toynet import Net
 
 
 @click.command()
@@ -91,7 +89,7 @@ def train(device, epochs, batch_size, lr):
             )
             step += 1
 
-        torch.save(model.state_dict(), f"toy-model.pt")
+        torch.save(model.state_dict(), "toy-model.pt")
 
         # Sample and plot ODE trajectory every epoch
         model.eval()

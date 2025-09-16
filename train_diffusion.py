@@ -1,15 +1,15 @@
 import math
 import os
+
 import click
-import numpy as np
+import matplotlib.pyplot as plt
 import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
 from tqdm import tqdm
+
 from unet import Unet
-import matplotlib.pyplot as plt
 
 
 @click.command()
@@ -84,7 +84,7 @@ def train(device, epochs, batch_size, lr):
             )
             step += 1
 
-        torch.save(model.state_dict(), f"model.pt")
+        torch.save(model.state_dict(), "model.pt")
 
         # Plot one noise sample with different timesteps
         # Sample one image from the dataset for visualization

@@ -1,16 +1,18 @@
 import math
 import os
+
 import click
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
 from tqdm import tqdm
+
 from toy.toy_utils import calc_karras_sigmas
 from unet import Unet
-import matplotlib.pyplot as plt
 
 
 @click.command()
@@ -127,8 +129,8 @@ def train(device, epochs, batch_size, lr, extra_plots):
 
             # Tangent normalization
             g_norm = torch.linalg.vector_norm(g, dim=(1, 2, 3), keepdim=True)
-            g_norm = g_norm * np.sqrt(
-                g_norm.numel() / g.numel()
+            g_norm = (
+                g_norm * np.sqrt(g_norm.numel() / g.numel())
             )  # Multiplying by sqrt(numel(g_norm) / numel(g)) ensures that the norm is invariant to the spatial dimensions.
             g = g / (
                 g_norm + 0.1
@@ -157,7 +159,7 @@ def train(device, epochs, batch_size, lr, extra_plots):
             )
             step += 1
 
-        torch.save(model.state_dict(), f"model_consistency.pt")
+        torch.save(model.state_dict(), "model_consistency.pt")
 
         #
         #

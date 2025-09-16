@@ -23,6 +23,7 @@
 
 
 import math
+
 import torch
 import torch.nn as nn
 
@@ -176,7 +177,7 @@ class EncoderBlock(nn.Module):
         super().__init__()
         self.conv0 = nn.Sequential(
             *[ResidualBottleneck(in_channels, in_channels) for i in range(3)],
-            ResidualBottleneck(in_channels, out_channels // 2)
+            ResidualBottleneck(in_channels, out_channels // 2),
         )
 
         self.time_mlp = TimeMLP(
@@ -203,7 +204,7 @@ class DecoderBlock(nn.Module):
         )
         self.conv0 = nn.Sequential(
             *[ResidualBottleneck(in_channels, in_channels) for i in range(3)],
-            ResidualBottleneck(in_channels, in_channels // 2)
+            ResidualBottleneck(in_channels, in_channels // 2),
         )
 
         self.time_mlp = TimeMLP(
@@ -256,7 +257,7 @@ class Unet(nn.Module):
 
         self.mid_block = nn.Sequential(
             *[ResidualBottleneck(channels[-1][1], channels[-1][1]) for i in range(2)],
-            ResidualBottleneck(channels[-1][1], channels[-1][1] // 2)
+            ResidualBottleneck(channels[-1][1], channels[-1][1] // 2),
         )
 
         self.logvar_linear = nn.Linear(time_embedding_dim, 1)

@@ -1,0 +1,6 @@
+[tool.ruff.lint]
+extend-select = ["I"]
+ignore = ["F403", "F405"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["toynet", "toy_utils"]
