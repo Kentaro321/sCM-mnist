@@ -60,7 +60,7 @@ def train(device, epochs, batch_size, lr, extra_plots):
         [transforms.ToTensor(), transforms.Normalize((0.5), (1.0))]
     )
     dataset = torchvision.datasets.MNIST(
-        root="./data", train=True, download=True, transform=transform
+        root="../../data", train=True, download=True, transform=transform
     )
     dataloader = DataLoader(
         dataset,
